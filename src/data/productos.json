@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "title": "remera",
+    "price": 3000,
+    "stock": 20,
+    "category": "remeras",
+    "img": "https://d22fxaf9t8d39k.cloudfront.net/3d0310eb928154bf6a5f6f86966a3272d7f87f0e8403cb3df4a9eed8e434626f115432.jpeg",
+    "detail": "TALLE: S, M, L, XL, COLOR: Blanco, negro y gris, MATERIAL: Algodón, DISEÑO: liso "
+  },
+  {
+    "id": 2,
+    "title": "musculosa",
+    "price": 3000,
+    "stock": 20,
+    "category": "remeras",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_805264-MLA71348176506_082023-O.webp",
+    "detail": "TALLE: S, M, L, XL, COLOR: Blanco, negro y gris, MATERIAL: Algodón, DISEÑO: liso "
+  },
+  {
+    "id": 3,
+    "title": "remera",
+    "price": 3000,
+    "stock": 12,
+    "category": "remeras",
+    "img": "https://megasports.vteximg.com.br/arquivos/ids/197151-1000-1000/65177404000_0.jpg?v=637624886142300000",
+    "detail": "TALLE: S, M, L, XL, COLOR: Blanco, negro y gris, MATERIAL: Algodón, DISEÑO: liso "
+  },
+  {
+    "id": 4,
+    "title": "falda",
+    "price": 3000,
+    "stock": 11,
+    "category": "pantalones",
+    "img": "https://valentino-cdn.thron.com/delivery/public/image/valentino/b9ea0ef0-4727-46d7-bb95-9183528fbed4/ihqstx/std/500x0/CREPE-COUTURE-SKIRT?quality=80&size=35&format=auto",
+    "detail": "TALLE: S, M, L, XL, COLOR: Blanco, negro y gris, MATERIAL: Lino, DISEÑO: liso "
+  },
+  {
+    "id": 5,
+    "title": "short",
+    "price": 3000,
+    "stock": 2,
+    "category": "pantalones",
+    "img": "https://bies.com.ar/wp-content/uploads/2017/12/Short-Deportivo-Azul.jpg",
+    "detail": "TALLE: S, M, L, XL, COLOR: Blanco, negro y gris, MATERIAL: Algodón, DISEÑO: liso "
+  },
+  {
+    "id": 6,
+    "title": "pantalon",
+    "price": 3000,
+    "stock": 15,
+    "category": "pantalones",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_938242-MLA47965553846_102021-O.webp",
+    "detail": "TALLE: S, M, L, XL, COLOR: Azul, celeste, negro y gris, MATERIAL: Demin, DISEÑO: Mom "
+  },
+  {
+    "id": 7,
+    "title": "buzo",
+    "price": 3000,
+    "stock": 20,
+    "category": "buzos",
+    "img": "https://crossclothing.com.ar/wp-content/uploads/2023/07/4x5-BUZO-GOTHBLACK-F.jpg",
+    "detail": "TALLE: S, M, L, XL, COLOR: Blanco, negro y gris, MATERIAL: Algodón, DISEÑO: liso "
+  }
+]
