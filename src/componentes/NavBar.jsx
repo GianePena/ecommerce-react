@@ -28,16 +28,3 @@ export const NavBar = () => (
  
 </>
 );
-
-// <li className="items"><a className="itemsLinks"href="#">Remeras</a></li>
-//<li className="items"><a className="itemsLinks"href="#">Pantalones</a></li>
-//<li className="items"><a className="itemsLinks"href="#">Buzos</a></li>
-
-
-/*   <NavLink to= "/">
-      <img className="logo"src="https://cdn-icons-png.freepik.com/256/5382/5382572.png?ga=GA1.2.223757486.1701650007&" alt="" />
-      </NavLink>
-      <NavLink key={categoria} to={`/categoria/${categoria}`}>
-        <p>Pantalones</p>
-      </NavLink>
-      <NavLink to= "/"></NavLink>*/

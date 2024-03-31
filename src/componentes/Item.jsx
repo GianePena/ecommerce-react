@@ -22,29 +22,4 @@ export const Item=({item})=>{
         
     )
 }
-/*
-export const Item= ({item})=>{
-    /*const [detalle, setDetalle]=useState('')
-    const [showDetalle, setShowDetalle]=useState(false)
-    function detalleDeProducto(d) {
-        setShowDetalle(!showDetalle); 
-        if (!showDetalle) {
-            setDetalle(d); 
-        } else {
-            setDetalle(''); 
-        }
-        }
-    return(
-        <>
-        <img src={item.img} alt="" />
-        <h3 key={item.id}>
-            {item.title}
-            {item.price}
-        </h3>
-        </>
-    )
-        
-}
- /*<ItemCount stock={product.stock} />
-        {showDetalle && <p>{product.detalle}</p>}
-        <button onClick={detalleDeProducto}>Ver detalle</button>*/
+

@@ -15,7 +15,7 @@ export const ItemCount = () => {
             setCount((prev)=>prev + 1);
             if (count === 9) {
                 setStock(false);
-                setMensaje("Sin stock"); //ver si puedo colocar el stock  if(setcounter==produc.stock)
+                setMensaje("Sin stock");
             }
         } else {
             setCount(count + 1);
