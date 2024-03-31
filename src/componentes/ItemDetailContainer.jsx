@@ -11,16 +11,13 @@ export const ItemDetailContainer = () => {
     useEffect(() => {
       const fetchItem = async () => {
         try {
-          // Simulación de una llamada asíncrona que devuelve un item después de 2 segundos
           setTimeout(() => {
-            // Aquí puedes realizar la lógica para obtener el item, 
-            // en este ejemplo, simplemente selecciono el primer item del array productos
             setItem(productos[4]);
-            setIsLoading(false); // Cuando se recibe el item, se marca como no cargando
+            setIsLoading(false); 
         }, 2000);
         } catch (error) {
         console.error('Error fetching item:', error);
-          setIsLoading(false); // Si ocurre un error, también se marca como no cargando
+          setIsLoading(false); 
         }
     };
     fetchItem();
@@ -40,20 +37,3 @@ export const ItemDetailContainer = () => {
     };
     
 
-/*
-const getItem=async()=>{
-    const [getProducts, setGetProducts]=useState([])
-    useEffect(()=>{
-        const fetchProducts= async()=>{
-            setTimeout(()=>{
-                setGetProducts(getProducts)
-            }, 2000)
-        }
-    }, [])
-    return(
-        <div>
-        </div>
-    )
-}*/
-
-//function itemDetailContainer(){}
