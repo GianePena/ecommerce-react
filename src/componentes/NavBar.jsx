@@ -9,7 +9,7 @@ export const NavBar = () => (
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <NavLink to="" className="itemLogo">
-        <img src="../assets/logo.png"alt="Logo" className="logo"/>
+        <img src="logo.png" alt="Logo" className="logo"/>
       </NavLink>
       <NavLink to="/category/remera" className="itemsLinks">Remeras</NavLink>
       <NavLink to="/category/pantalon" className="itemsLinks">Pantalones</NavLink>

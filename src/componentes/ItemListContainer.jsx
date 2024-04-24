@@ -3,7 +3,7 @@ import { ItemList } from "./ItemList";
 import { getFirestore, getDocs, addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 import productos from "../data/productos.json"
-export const ItemListContainer = ({itemsFiltrados}) => {
+export const ItemListContainer = ({itemsFiltrados, categoryId}) => {
     const [items, setItems] = useState([]);
     const uploadData = async () => {
         const db = getFirestore();
@@ -42,16 +42,16 @@ export const ItemListContainer = ({itemsFiltrados}) => {
 
     return (
         <div className="home">
-            <div>
-                <h1 className="tituloPagina">HOME</h1>
-            </div>
-            <div className="productList">
                 {itemsFiltrados && itemsFiltrados.length > 0 ? (
-                    <ItemList items={itemsFiltrados} />
+                <div className="contenidoPagina">
+                    <h1 className="tituloPagina">{categoryId ? categoryId : "HOME"}</h1>
+                    <div className="productList">
+                        <ItemList items={itemsFiltrados} />
+                    </div>
+                </div>
                 ) : (
                     <p>Cargando productos...</p>
                 )}
-            </div>
         </div>
     );
 };

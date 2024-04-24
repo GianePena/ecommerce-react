@@ -52,6 +52,7 @@ export const Cart = () => {
             },
             carrito,
             total,
+            date:new Date().toLocaleString() 
         };
         console.log(order)
         await uploadBuyer(order)

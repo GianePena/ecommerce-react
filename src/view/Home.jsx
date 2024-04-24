@@ -25,7 +25,7 @@ useEffect(() => {
     return(
         <div>
             <Link to="/"></Link>
-            <ItemListContainer itemsFiltrados={filterProducts}/>
+            <ItemListContainer categoryId={categoryId}itemsFiltrados={filterProducts}/>
         </div>
             
     )
