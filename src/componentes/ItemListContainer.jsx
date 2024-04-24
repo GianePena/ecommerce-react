@@ -1,34 +1,58 @@
+import { useState, useEffect } from "react";
+import { ItemList } from "./ItemList";
+import { getFirestore, getDocs, addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 
-import React, { useState, useEffect } from "react"
 import productos from "../data/productos.json"
-import { ItemList } from "./ItemList"
-export const ItemListContainer = ({greeting}) => {
-    const [items, setItems]=useState([])
-    useEffect(()=>{
-        const fetchProducts= async()=>{
-            setTimeout(()=>{
-                setItems(productos)
-            }, 2000)
+export const ItemListContainer = ({itemsFiltrados}) => {
+    const [items, setItems] = useState([]);
+    const uploadData = async () => {
+        const db = getFirestore();
+        const controlDocRef = doc(db, "settings", "dataUploadControl");
+        const controlDocSnap = await getDoc(controlDocRef);
+        if (controlDocSnap.exists() && controlDocSnap.data().dataUploaded) {
+            console.log('Los datos ya han sido cargados previamente.');
+            return;
         }
-        fetchProducts()
-    },[])
-    return(
-        < >
+        const collectionRef = collection(db, "itemCollection");
+        try {
+            for (const item of productos) {
+                await addDoc(collectionRef, item);
+            }
+            await setDoc(controlDocRef, { dataUploaded: true });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        uploadData();
+        const db = getFirestore();
+        const refCollection = collection(db, "itemCollection");
+        getDocs(refCollection).then((snapshot) => {
+            if (snapshot.size === 0) {
+                console.log("No se encontraron productos");
+            } else {
+                const fetchedItems = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                setItems(fetchedItems);
+                console.log("Productos cargados correctamente");
+            }
+        })
+    }, []);
+
+
+    return (
+        <div className="home">
             <div>
-                <h1>{greeting}</h1>
+                <h1 className="tituloPagina">HOME</h1>
             </div>
-            <div >
-                {items.length === 0 ? (
-                <p>Cargando productos...</p>
+            <div className="productList">
+                {itemsFiltrados && itemsFiltrados.length > 0 ? (
+                    <ItemList items={itemsFiltrados} />
                 ) : (
-                <ItemList items={items} />
-        )}
+                    <p>Cargando productos...</p>
+                )}
+            </div>
         </div>
-        </>
-    )
-
-}
-
-
-
+    );
+};
 
