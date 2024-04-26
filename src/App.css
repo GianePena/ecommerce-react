@@ -96,12 +96,17 @@
 
 }
 
-.contenidoPagina{
+.productCart{
+  list-style: none;
+  font-family:monospace;
+  padding: 20px;
+  margin-bottom: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  gap:40px;
-  padding: 50px;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .productList{
@@ -155,18 +160,7 @@
   align-items: center;
 
 }
-.productList{
-  list-style: none;
-  font-family:monospace;
-  padding: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
+
 .productTitle{
   text-transform: capitalize;
   font-family:monospace;
@@ -232,10 +226,7 @@ margin-top: -20px;
 .tituloFormulario{
   text-decoration: underline;
 }
-.btnEnviar{
-  width: 100px;
-  font-size: 15px;
-}
+
 .btnConfirmarCompra{
   height: 60px;
   

@@ -38,7 +38,7 @@ export const CartContextProvider = ({children}) => {
         setCarrito([]);
     }
     const deleteItem = (id) => {
-        const nuevoCarrito = carrito.filter((product) => product.id !== id);
+        const nuevoCarrito = carrito.filter((item) => item.producto.id !== id);
         setCarrito(nuevoCarrito);
     }
     const sendBuyer=()=>{

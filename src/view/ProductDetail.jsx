@@ -45,7 +45,7 @@ return (
     <div className="productDetail">
       {product && (
         <>
-          <Item item={product} />
+          <Item item={product}  />
           <div className="detalle">
             <p className="productDetailText">{product.detail}</p>
             <ItemCount producto={product} stock={product.stock} cantidad= {cantidad}incremento={incremento} decremento={decremento} />

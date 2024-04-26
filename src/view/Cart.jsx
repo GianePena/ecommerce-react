@@ -6,7 +6,7 @@ import { CartContext } from "../context/CartContext.jsx";
 import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 import Swal from 'sweetalert2'
 export const Cart = () => {
-    const { carrito, removeList} = useContext(CartContext);
+    const { carrito, removeList, deleteItem} = useContext(CartContext);
     const [name, setName]=useState("")
     const [phone, setPhone]=useState("")
     const [email, setEmail]=useState("")
@@ -16,6 +16,7 @@ export const Cart = () => {
         const precioTotalItem = precioProducto * cantidad;
         return acc + precioTotalItem;
     }, 0);
+
     const showAgradecimiento=()=>{
         Swal.fire({
             title: "Seguro desea confirmar la compra?",
@@ -35,8 +36,7 @@ export const Cart = () => {
             removeList()
             }
         });
-    }
-    const uploadBuyer = async (order) => {
+        const uploadBuyer = async (order) => {
     
             const db = getFirestore();
             const refCollection = collection(db, "orders");
@@ -61,6 +61,9 @@ export const Cart = () => {
         setPhone("")
         setEmail("")
     }
+    sendBuyer()
+    }
+    
     return (
         <div>
             <h1 className="tituloPagina">CART</h1>
@@ -73,10 +76,10 @@ export const Cart = () => {
                     <div>
                         <ul>
                             {carrito.map((item, index) => (
-                                <li className="productList"key={index}>
+                                <li className="productCart"key={index}>
                                     <img className="imgProductoCarrito"src={item.producto.img} alt={item.producto.price} />
                                     <div className=" contenidoCart">
-                                        <Button  variant="outline-dark" className="btnCancelar" onClick={removeList}>X</Button>
+                                        <Button  variant="outline-dark" className="btnCancelar" onClick={() => deleteItem(item.producto.id)}>X</Button>
                                         <h3 className="productTitle">{item.producto.title}</h3>
                                         <p>Precio unitario: ${item.producto.price}</p>
                                         <p>Cantidad: {item.cantidad}</p>
@@ -96,9 +99,20 @@ export const Cart = () => {
                         <input type="text" className="telefono"  value={phone} onChange={(e)=>setPhone(e.target.value)}/><br />
                         <label >Email</label>
                         <input type="text" className="email" value={email} onChange={(e)=>setEmail(e.target.value)}/><br />
-                        <Button className="btnEnviar"type="submit" variant="outline-dark"onClick={sendBuyer}>ENVIAR</Button><br />
                     </div>
-                    <Button className="btnConfirmarCompra" variant="outline-dark"onClick={showAgradecimiento}>CONFIRMAR COMPRA</Button><br />
+                    <Button className="btnConfirmarCompra" variant="outline-dark" onClick={() => 
+                    { if (name !== "" && phone !== "" && email !== "") {
+                        showAgradecimiento()
+                    } else {
+                        Swal.fire({
+                            title: "Datos incompletos",
+                            text: "Por favor, completa todos los campos.",
+                            icon: "warning",
+                        });
+                            }
+                    }} >
+                        CONFIRMAR COMPRA
+                        </Button><br /><br />
                 </div>
             ) : (
                 <h1 className="comenzarCompra">Comenzar compra</h1>
