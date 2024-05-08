@@ -16,7 +16,7 @@ export const ItemCount = ({ stock, cantidad, incremento, decremento})=> {
                 <p className="cantidad">{cantidad}</p>
                 { cantidad > 1 ? <Button variant="outline-dark" onClick={decremento}>-</Button> : <Button variant="outline-dark" disabled>-</Button>}
             </div>
-            {cantidad ===stock ?(<p>Sin stock</p>):(" ")}
+            {cantidad === stock ? (<p>Sin stock</p>) : null}
             
         </>
     )

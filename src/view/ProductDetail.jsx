@@ -4,12 +4,13 @@ import { Item } from "../componentes/Item.jsx"
 import { ItemCount } from "../componentes/ItemCount.jsx"
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom"
-import { CartContext } from "../context/CartContext.jsx"
+import { CartContext } from "../contexts/CartContext.jsx"
 import {getFirestore, doc ,getDoc} from "firebase/firestore"
 export const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [cantidad, setCantidad] = useState(1)
+  const [productoAgregado, setProductoAgregado] = useState(false);
   const {addToCart}=useContext(CartContext)
   useEffect(() => {
     const db = getFirestore();
@@ -35,29 +36,37 @@ if (cantidad > 1) {
 };
 const handleAddToCart = () => {
   addToCart(product, cantidad)
+  setCantidad(0)
+  setProductoAgregado(true)
+  setTimeout(() => {
+    setProductoAgregado(false)
+  }, 3000);
+
 };
 return (
   <div className="mainDetalle">
-    <h1 className="tituloPagina">DETALLE DEL PRODUCTO</h1>
-    <Link to={`/`}>
-      <Button className="btnVolver" variant="outline-dark">VOLVER A LA HOME</Button> <br /><br />
-    </Link>
-    <div className="productDetail">
-      {product && (
-        <>
-          <Item item={product}  />
-          <div className="detalle">
-            <p className="productDetailText">{product.detail}</p>
-            <ItemCount producto={product} stock={product.stock} cantidad= {cantidad}incremento={incremento} decremento={decremento} />
-            <Button variant="outline-dark" onClick={handleAddToCart}>Agregar al carrito</Button>
-            <Link to={`/cart`}>
-              <Button className="btnTerminarCompra"variant="outline-dark">Terminar compra </Button> <br /><br />
-            </Link>
-          </div>
-        </>
-      )}
-    </div>
+      <h1 className="tituloPagina">DETALLE DEL PRODUCTO</h1>
+      <Link to={`/`}>
+          <Button className="btnVolver" variant="outline-dark">VOLVER A LA HOME</Button> <br /><br />
+      </Link>
+      <div className="productDetail">
+          {product && (
+              <>
+                  <Item item={product} />
+                  <div className="detalle">
+                      <p className="productDetailText">{product.detail}</p>
+                      <ItemCount producto={product} stock={product.stock} cantidad={cantidad} incremento={incremento} decremento={decremento} />
+                      <Button variant="outline-dark" onClick={handleAddToCart}>Agregar al carrito</Button>
+                      {productoAgregado && (
+                          <p className="productoAgregadoMensaje">Producto agregado con éxito.</p>
+                      )}
+                      <Link to={`/cart`}>
+                          <Button className="btnTerminarCompra" variant="outline-dark">Terminar compra</Button> <br /><br />
+                      </Link>
+                  </div>
+              </>
+          )}
+      </div>
   </div>
 );
-
 };

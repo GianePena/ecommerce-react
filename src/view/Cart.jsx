@@ -2,21 +2,27 @@
 import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom"
-import { CartContext } from "../context/CartContext.jsx";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
-import Swal from 'sweetalert2'
+import { CartContext } from "../contexts/CartContext.jsx";
+import { getFirestore, collection, doc, setDoc, addDoc } from "firebase/firestore";
+import Swal from 'sweetalert2';
 export const Cart = () => {
     const { carrito, removeList, deleteItem} = useContext(CartContext);
     const [name, setName]=useState("")
     const [phone, setPhone]=useState("")
     const [email, setEmail]=useState("")
+    const [idCompra, setIdCompra]=useState(null)
     const total = carrito.reduce((acc, item) => {
         const precioProducto = item.producto.price;
         const cantidad = item.cantidad;
         const precioTotalItem = precioProducto * cantidad;
         return acc + precioTotalItem;
     }, 0);
-
+    const uploadBuyer = async (order) => {
+        const db = getFirestore();
+        const refCollection = collection(db, "orders");
+        const docRef = await addDoc(refCollection, order);
+        return setIdCompra(docRef.id)
+    };
     const showAgradecimiento=()=>{
         Swal.fire({
             title: "Seguro desea confirmar la compra?",
@@ -28,21 +34,15 @@ export const Cart = () => {
             confirmButtonText: "Si!"
             }).then((result) => {
             if (result.isConfirmed) {
+                sendBuyer()
                 Swal.fire({
                 title: "Compra realizada con exito!",
-                text: "Los  detalles llegaran a su email.",
+                text: `Compra exitosa los detalles llegarán a su email.`,
                 icon: "success"
             });
             removeList()
             }
         });
-        const uploadBuyer = async (order) => {
-    
-            const db = getFirestore();
-            const refCollection = collection(db, "orders");
-            await setDoc(doc(refCollection), order);
-    };
-
     const sendBuyer = async () => {
         const order = {
             buyer: {
@@ -61,7 +61,6 @@ export const Cart = () => {
         setPhone("")
         setEmail("")
     }
-    sendBuyer()
     }
     
     return (
@@ -83,12 +82,12 @@ export const Cart = () => {
                                         <h3 className="productTitle">{item.producto.title}</h3>
                                         <p>Precio unitario: ${item.producto.price}</p>
                                         <p>Cantidad: {item.cantidad}</p>
-                                        <p >Precio total: ${item.producto.price * item.cantidad}</p>
-                                        </div>
-                                    
+                                        <p>Precio total: ${item.producto.price * item.cantidad}</p>
+                                    </div>
                                 </li>
                             ))}
                         </ul> 
+                        <Button  variant="outline-dark" className="btnVaciar" onClick={removeList}>Vaciar carrito</Button>
                     </div> 
                     <h4 className="total">Total a pagar: ${total}</h4>
                     <div className="formulario">
@@ -114,8 +113,9 @@ export const Cart = () => {
                         CONFIRMAR COMPRA
                         </Button><br /><br />
                 </div>
-            ) : (
-                <h1 className="comenzarCompra">Comenzar compra</h1>
+            ) : ( <div>
+                {idCompra?<h3 className="comenzarCompra">Nº de orden de su compra: {idCompra}</h3> : <h1 className="comenzarCompra">Comenzar compra</h1>}
+                </div>
             )}
         </div>
         </div>

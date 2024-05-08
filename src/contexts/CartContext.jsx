@@ -7,7 +7,6 @@ export const CartContextProvider = ({children}) => {
     const [carrito, setCarrito] = useState([]);
     const [productos, setProductos]=useState([])
     useEffect(() => {
-
         const db = getFirestore();
         const refCollection = collection(db, "itemCollection");
         getDocs(refCollection).then((snapshot) => {
@@ -16,7 +15,6 @@ export const CartContextProvider = ({children}) => {
             } else {
                 const fetchedItems = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
                 setProductos(fetchedItems);
-                console.log("Productos cargados correctamente");
             }
         })
     }, []);
@@ -30,9 +28,8 @@ export const CartContextProvider = ({children}) => {
         } else {
             setCarrito([...carrito, { producto, cantidad }]);
         }
-        alert(`Se agregaron ${cantidad} productos al carrito`);
-        console.log(carrito);
-    };
+        console.log(`Producto agregado correctamente: ${cantidad} ${producto.title}`);
+        };
 
     const removeList = () => {
         setCarrito([]);

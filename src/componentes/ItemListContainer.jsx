@@ -10,7 +10,6 @@ export const ItemListContainer = ({itemsFiltrados, categoryId}) => {
         const controlDocRef = doc(db, "settings", "dataUploadControl");
         const controlDocSnap = await getDoc(controlDocRef);
         if (controlDocSnap.exists() && controlDocSnap.data().dataUploaded) {
-            console.log('Los datos ya han sido cargados previamente.');
             return;
         }
         const collectionRef = collection(db, "itemCollection");
@@ -34,7 +33,6 @@ export const ItemListContainer = ({itemsFiltrados, categoryId}) => {
             } else {
                 const fetchedItems = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
                 setItems(fetchedItems);
-                console.log("Productos cargados correctamente");
             }
         })
     }, []);

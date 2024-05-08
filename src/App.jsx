@@ -5,7 +5,7 @@ import { NavBar } from './componentes/NavBar';
 import { ProductDetail } from './view/ProductDetail.jsx';
 import { Home } from './view/Home';
 import { Cart } from './view/Cart';
-import {CartContextProvider  } from './context/CartContext.jsx';
+import {CartContextProvider  } from './contexts/CartContext.jsx';
 
 function App() {
 
